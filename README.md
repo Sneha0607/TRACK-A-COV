@@ -1,0 +1,2 @@
+# CovidTracker
+Java Desktop Application

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
+   <children>
+      <HBox layoutX="50.0" layoutY="14.0" prefHeight="100.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="200.0" text="Total Confirmed Cases" textAlignment="CENTER" />
+                  <Label fx:id="indiaConfirmed" alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="200.0" text="Label" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="200.0" text="Recovered" textAlignment="CENTER" />
+                  <Label fx:id="indiaRecovered" alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="200.0" text="Label" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="200.0" text="Total Deaths" textAlignment="CENTER" />
+                  <Label fx:id="indiaDeaths" alignment="BASELINE_CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="200.0" text="Label" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <AreaChart fx:id="graph" layoutX="84.0" layoutY="181.0" prefHeight="281.0" prefWidth="498.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </AreaChart>
+   </children>
+</Pane>
