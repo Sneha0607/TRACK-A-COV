@@ -36,23 +36,23 @@ public class Dashboard {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String JsonObject = response.body();
             Home data = new Gson().fromJson(JsonObject, Home.class);
-            for(regionData reg: data.regionData){
+            for(Home.regionData reg: data.regionData){
                 System.out.println(reg);
             }
             Statement s = conn.createStatement();
             s.executeUpdate("Use COVIDDATABASE");
             PreparedStatement ps = conn.prepareStatement("INSERT INTO DASHBOARD VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setInt(1, data.getActiveCases());
-            ps.setInt(2, data.getActiveCasesNew());
-            ps.setInt(3, data.getRecovered());
-            ps.setInt(4, data.getRecoveredNew());
-            ps.setInt(5, data.getDeaths());
-            ps.setInt(6, data.getDeathsNew());
-            ps.setInt(7, data.getPreviousDayTests());
-            ps.setInt(8, data.getTotalCases());
-            ps.setString(9, data.getSourceUrl());
-            ps.setString(10, data.getLastUpdatedAtApify());
-            ps.setString(11, data.getReadMe());
+            ps.setInt(1, data.activeCases);
+            ps.setInt(2, data.activeCasesNew);
+            ps.setInt(3, data.recovered);
+            ps.setInt(4, data.recoveredNew);
+            ps.setInt(5, data.deaths);
+            ps.setInt(6, data.deathsNew);
+            ps.setInt(7, data.previousDayTests);
+            ps.setInt(8, data.totalCases);
+            ps.setString(9, data.sourceUrl);
+            ps.setString(10, data.lastUpdatedAtApify);
+            ps.setString(11, data.readMe);
             ps.executeUpdate();
 
         }catch (SQLException e) {

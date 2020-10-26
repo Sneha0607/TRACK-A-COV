@@ -29,6 +29,14 @@ public class Helpline {
             public class Regional {
                 public String loc;
                 public String number;
+
+                public String getLoc() {
+                    return loc;
+                }
+
+                public String getNumber() {
+                    return number;
+                }
             }
         }
     }

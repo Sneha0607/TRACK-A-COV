@@ -17,15 +17,17 @@ public class HomeController implements Initializable {
     @FXML private Label indiaRecovered;
     @FXML private Label indiaDeaths;
 
+    HomeAPI homeAPI = new HomeAPI();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        HomeAPI homeAPI = new HomeAPI();
+
         try {
-            Home data = homeAPI.HomeAPI();
-            indiaConfirmed.setText(String.valueOf(data.getTotalCases()));
-            indiaRecovered.setText(String.valueOf(data.getRecovered()));
-            indiaDeaths.setText(String.valueOf(data.getDeaths()));
+            Home response = homeAPI.HomeAPI();
+            Home data = response;
+            indiaConfirmed.setText(String.valueOf(data.totalCases));
+            indiaRecovered.setText(String.valueOf(data.recovered));
+            indiaDeaths.setText(String.valueOf(data.deaths));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

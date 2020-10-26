@@ -3,58 +3,61 @@ package softablitz;
 import java.util.List;
 
 public class Home {
-    int activeCases;
-    int activeCasesNew;
-    int recovered;
-    int recoveredNew;
-    int deaths;
-    int deathsNew;
-    int previousDayTests;
-    int totalCases;
-    String sourceUrl;
-    String lastUpdatedAtApify;
-    String readMe;
-    List<regionData> regionData;
+    public int activeCases;
+    public int activeCasesNew;
+    public int recovered;
+    public int recoveredNew;
+    public int deaths;
+    public int deathsNew;
+    public int previousDayTests;
+    public int totalCases;
+    public String sourceUrl;
+    public String lastUpdatedAtApify;
+    public String readMe;
+    public regionData[] regionData;
 
-    public Home() {
 
-    }
+        public static class regionData {
+            public String region;
+            public int totalInfected;
+            public int newInfected;
+            public int recovered;
+            public int newRecovered;
+            public int deceased;
+            public int newDeceased;
 
-    public int getActiveCases(){
-        return activeCases;
-    }
-    public int getActiveCasesNew(){
-        return activeCasesNew;
-    }
-    public int getRecovered(){
-        return recovered;
-    }
-    public int getRecoveredNew(){
-        return recoveredNew;
-    }
-    public int getDeaths(){
-        return deaths;
-    }
-    public int getDeathsNew(){
-        return deathsNew;
-    }
-    public int getPreviousDayTests(){
-        return previousDayTests;
-    }
-    public int getTotalCases(){
-        return totalCases;
-    }
-    public String getSourceUrl(){
-        return sourceUrl;
-    }
-    public String getLastUpdatedAtApify(){
-        return lastUpdatedAtApify;
-    }
-    public String getReadMe(){
-        return readMe;
-    }
+            public String getRegion() {
+                return region;
+            }
 
-    public List<softablitz.regionData> getRegionData() {
-        return regionData;
-    }
+            public int getTotalInfected() {
+                return totalInfected;
+            }
+
+            public int getNewInfected() {
+                return newInfected;
+            }
+
+            public int getRecovered() {
+                return recovered;
+            }
+
+            public int getNewRecovered() {
+                return newRecovered;
+            }
+
+            public int getDeceased() {
+                return deceased;
+            }
+
+            public int getNewDeceased() {
+                return newDeceased;
+            }
+
+            @Override
+            public String toString(){
+                return "Region: " + region + "TotalInfected: " + totalInfected + "NewInfected: " + newInfected + "Recovered: "
+                        + recovered + "NewRecovered:" + newRecovered + "Deceased: " + deceased + "NewDeceased: " +newDeceased;
+            }
+        }
 }

@@ -1,7 +1,5 @@
 package Controllers;
 
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,10 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import softablitz.Helpline;
 import softablitz.HelplineAPI;
-import softablitz.Notifications;
-import softablitz.NotificationsAPI;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +25,6 @@ public class HelplineController implements Initializable {
     @FXML private Hyperlink email;
     @FXML private Hyperlink twitter;
     @FXML private Hyperlink facebook;
-    @FXML private Hyperlink media;
     @FXML private TableView<Helpline.HelplineData.Contacts.Regional> regionalTable;
     @FXML private TableColumn<Helpline.HelplineData.Contacts.Regional, String> state;
     @FXML private TableColumn<Helpline.HelplineData.Contacts.Regional, String> contact;
@@ -46,7 +40,6 @@ public class HelplineController implements Initializable {
             email.setText(primary.email);
             twitter.setText(primary.twitter);
             facebook.setText(primary.facebook);
-            media.setText(String.valueOf(primary.media));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -60,11 +53,6 @@ public class HelplineController implements Initializable {
             Helpline.HelplineData.Contacts.Regional[] regional = response.data.contacts.regional;
 
             ObservableList<Helpline.HelplineData.Contacts.Regional> regionalData = FXCollections.observableArrayList(regional);
-
-           // regionalTable.getColumns().addAll(state, contact);
-
-           // state.setCellValueFactory();
-            //contact.setCellValueFactory();
 
             regionalTable.setItems(regionalData);
             state.setCellValueFactory(new PropertyValueFactory<Helpline.HelplineData.Contacts.Regional, String>("loc"));

@@ -20,7 +20,10 @@ public class Main extends Application {
 
 
    public static void main(String[] args) throws IOException, InterruptedException {
-        NotificationsAPI notificationsAPI = new NotificationsAPI();
+       HomeSQL homeSQL = new HomeSQL();
+       homeSQL.HomeSQL();
+       HelplineSQL helplineSQL = new HelplineSQL();
+       helplineSQL.HelplineSQL();
              launch(args);
     }
 }
