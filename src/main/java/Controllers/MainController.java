@@ -41,7 +41,7 @@ public class MainController implements Initializable {
 
     public void handleBtnDateAction(ActionEvent actionEvent) throws IOException {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("/Date.fxml");
+        Pane view = object.getPage("/Datewise.fxml");
         mainPane.setCenter(view);
     }
 

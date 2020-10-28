@@ -10,5 +10,8 @@
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></Label>
+      <ChoiceBox layoutX="108.0" layoutY="106.0" prefWidth="150.0" />
+      <ComboBox layoutX="183.0" layoutY="206.0" prefWidth="150.0" />
+      <ListView prefHeight="200.0" prefWidth="200.0" />
    </children>
 </Pane>

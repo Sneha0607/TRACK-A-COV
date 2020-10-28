@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane id="statePane" fx:id="StatePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StateController">
    <children>
@@ -17,6 +18,12 @@
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </padding>
       </TableView>
+      <TextField fx:id="searchField" layoutX="196.0" layoutY="25.0" prefHeight="25.0" prefWidth="214.0" />
+      <Label layoutX="31.0" layoutY="29.0" prefHeight="17.0" prefWidth="159.0" text="Search for any State/UT">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
 
    </children>
 </Pane>

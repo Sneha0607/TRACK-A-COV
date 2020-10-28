@@ -7,9 +7,9 @@ public class HelplineSQL {
     static final String url = "jdbc:mysql://localhost/";
     static final String user = "root";
     static final String pass = "Sneha@0607";
-    HelplineAPI helplineAPI = new HelplineAPI();
-    public  void HelplineSQL() {
 
+    public static Connection HelplineSQL() {
+        HelplineAPI helplineAPI = new HelplineAPI();
         Connection connection = null;
         Statement statement = null;
         try {
@@ -25,11 +25,11 @@ public class HelplineSQL {
                 preparedStatement.setString(2, regional.getNumber());
                 preparedStatement.executeUpdate();
             }
-
+            return connection;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ;
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -40,13 +40,7 @@ public class HelplineSQL {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e2) {
-                e2.printStackTrace();
-            }
         }
+        return connection;
     }
 }

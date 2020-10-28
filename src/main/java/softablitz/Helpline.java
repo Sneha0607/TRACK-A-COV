@@ -1,9 +1,5 @@
 package softablitz;
 
-import javafx.beans.property.SimpleStringProperty;
-
-import java.util.List;
-
 public class Helpline {
     public Boolean success;
     public HelplineData data;
@@ -26,9 +22,14 @@ public class Helpline {
                 public String[] media;
             }
 
-            public class Regional {
+            public static class Regional {
                 public String loc;
                 public String number;
+
+                public Regional(String state, String contact) {
+                    loc = state;
+                    number = contact;
+                }
 
                 public String getLoc() {
                     return loc;
