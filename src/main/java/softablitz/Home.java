@@ -54,6 +54,10 @@ public class Home {
                 return newDeceased;
             }
 
+            public int getTotal(){
+                return totalInfected+recovered+deceased;
+            }
+
             @Override
             public String toString(){
                 return "Region: " + region + "TotalInfected: " + totalInfected + "NewInfected: " + newInfected + "Recovered: "

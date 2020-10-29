@@ -5,16 +5,13 @@ import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 
 public class NotificationsAPI {
 
-    public NotificationsAPI() throws IOException, InterruptedException {
+    public Notifications NotificationsAPI() throws IOException, InterruptedException {
 
         String searchUrl = "https://api.rootnet.in/covid19-in/notifications";
         Gson gson = new GsonBuilder().create();
@@ -47,16 +44,11 @@ public class NotificationsAPI {
             BufferedReader br = new BufferedReader(new InputStreamReader(urlcon.getInputStream()));
 
             Notifications response = gson.fromJson(br, Notifications.class); // created response object
-
-           Notifications.NotificationsData[] News = response.data.notifications;
-           for(Notifications.NotificationsData New : News)
-            {
-               System.out.println("Title : " + New.title);
-               System.out.println("Link : " + New.link + "\n");
-            }
+            return response;
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

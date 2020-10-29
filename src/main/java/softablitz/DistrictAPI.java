@@ -9,16 +9,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class DatewiseAPI {
-
-    public Datewise DatewiseAPI() throws IOException, InterruptedException {
-        String searchUrl = "https://api.covid19india.org/data.json";
+public class DistrictAPI {
+    public District DistrictAPI() throws IOException, InterruptedException {
+        String searchUrl = "https://api.covidindiatracker.com/state_data.json";
         Gson gson = new GsonBuilder().create();
 
         try
         {
-            File myFile = new File("Datewise.json");
-            FileOutputStream fos = new FileOutputStream("Datewise.json");
+            File myFile = new File("District.json");
+            FileOutputStream fos = new FileOutputStream("District.json");
 
             URL url = new URL(searchUrl);
             URLConnection urlcon = url.openConnection();
@@ -42,7 +41,7 @@ public class DatewiseAPI {
             URLConnection urlcon = url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(urlcon.getInputStream()));
 
-            Datewise response = gson.fromJson(br, (Type) Datewise.class); // created response object
+            District response = gson.fromJson(br, (Type) District.class); // created response object
             return response;
         }
         catch (MalformedURLException e) {

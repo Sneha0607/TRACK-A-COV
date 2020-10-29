@@ -15,13 +15,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import softablitz.Helpline;
 import softablitz.HelplineAPI;
+import softablitz.HelplineSQL;
+import softablitz.SQLConnection;
 
 
+import javax.security.sasl.SaslException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HelplineController implements Initializable {
@@ -73,21 +79,27 @@ public class HelplineController implements Initializable {
         Desktop desktop = Desktop.getDesktop();
         desktop.browse(new URI(primary.facebook));
     }
+    public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
+        HelplineSQL helplineSQL = new HelplineSQL();
+        helplineSQL.HelplineSQL();
+        PrimaryContact();
+        RegionalContact();
+    }
+
 
     public void RegionalContact() {
         try {
-            Helpline response = helplineAPI.HelplineAPI();
-            Helpline.HelplineData.Contacts.Regional[] regional = response.data.contacts.regional;
+            Helpline.HelplineData.Contacts.Regional[] regional = new Helpline.HelplineData.Contacts.Regional[0];
 
             ObservableList<Helpline.HelplineData.Contacts.Regional> regionalList = FXCollections.observableArrayList(regional);
-            /*
-            Connection connection = HelplineSQL.HelplineSQL();
+
+            Connection connection = SQLConnection.getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery("select * from HELPLINESREGIONAL");
 
             while(resultSet.next()) {
-                regionalData.add(new Helpline.HelplineData.Contacts.Regional(resultSet.getString("state"), resultSet.getString("contact")));
+                regionalList.add(new Helpline.HelplineData.Contacts.Regional(resultSet.getString("state"), resultSet.getString("phonenumber")));
             }
-            */
+
             state.setCellValueFactory(new PropertyValueFactory<Helpline.HelplineData.Contacts.Regional, String>("loc"));
             contact.setCellValueFactory(new PropertyValueFactory<Helpline.HelplineData.Contacts.Regional, String>("number"));
             regionalTable.setItems(regionalList);
@@ -111,9 +123,8 @@ public class HelplineController implements Initializable {
             sortedData.comparatorProperty().bind(regionalTable.comparatorProperty());
             regionalTable.setItems(sortedData);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        }
+        catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -121,8 +132,8 @@ public class HelplineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       PrimaryContact();
-       RegionalContact();
+        PrimaryContact();
+        RegionalContact();
     }
 
 }

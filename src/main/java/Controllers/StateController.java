@@ -10,39 +10,84 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import softablitz.Helpline;
 import softablitz.Home;
 import softablitz.HomeAPI;
+import softablitz.SQLConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class StateController implements Initializable {
 
-    @FXML private TableView<Home.regionData> stateTable;
-    @FXML private TableColumn<Home.regionData, String> stateUT;
-    @FXML private TableColumn<Home.regionData, Integer> confirmed;
-    @FXML private TableColumn<Home.regionData, Integer> recovered;
-    @FXML private TableColumn<Home.regionData, Integer> deaths;
+    @FXML private TableView<StateList> stateTable;
+    @FXML private TableColumn<StateList, String> stateUT;
+    @FXML private TableColumn<StateList, Integer> confirmed;
+    @FXML private TableColumn<StateList, Integer> recovered;
+    @FXML private TableColumn<StateList, Integer> deaths;
+    @FXML private TableColumn<StateList, Integer> total;
     @FXML private TextField searchField;
+    public class StateList{
+        public String State;
+        public int active;
+        public int recovered;
+        public int deceased;
+        public int total;
 
-    HomeAPI homeAPI = new HomeAPI();
+        public StateList(String state, int totalinfected, int recovered, int deceased, int total) {
+            this.State = state;
+            this.active = totalinfected;
+            this.recovered = recovered;
+            this.deceased = deceased;
+            this.total = total;
+        }
+
+        public String getState() {
+            return State;
+        }
+        public int getActive() {
+            return active;
+        }
+
+        public int getRecovered() {
+            return recovered;
+        }
+        public int getDeceased() {
+            return deceased;
+        }
+
+        public int getTotal() {
+            return total;
+        }
+    }
 
     public void showData()
     {
         try {
-            Home response = homeAPI.HomeAPI();
-            Home.regionData[] regionData = response.regionData;
+            StateList[] stateList = new StateList[0];
+            Connection connection = SQLConnection.getConnection();
+            ObservableList<StateList> stateObservableArrayList = FXCollections.observableArrayList(stateList);
+            ResultSet resultSet = connection.createStatement().executeQuery("Select * from STATEWISE");
+            while(resultSet.next()){
+                stateObservableArrayList.add(new StateList(resultSet.getString("State"),
+                        (resultSet.getInt("Active")),
+                        resultSet.getInt("Recovered"),
+                        resultSet.getInt("Deceased"),
+                        resultSet.getInt("TotalCases")));
+            }
 
-            ObservableList<Home.regionData> regionList = FXCollections.observableArrayList(regionData);
+            stateUT.setCellValueFactory(new PropertyValueFactory<StateList, String>("State"));
+            confirmed.setCellValueFactory(new PropertyValueFactory<StateList, Integer>("active"));
+            recovered.setCellValueFactory(new PropertyValueFactory<StateList, Integer>("recovered"));
+            deaths.setCellValueFactory(new PropertyValueFactory<StateList, Integer>("deceased"));
+            total.setCellValueFactory(new PropertyValueFactory<StateList, Integer>("total"));
+            stateTable.setItems(stateObservableArrayList);
 
-            stateUT.setCellValueFactory(new PropertyValueFactory<Home.regionData, String>("region"));
-            confirmed.setCellValueFactory(new PropertyValueFactory<Home.regionData, Integer>("totalInfected"));
-            recovered.setCellValueFactory(new PropertyValueFactory<Home.regionData, Integer>("recovered"));
-            deaths.setCellValueFactory(new PropertyValueFactory<Home.regionData, Integer>("deceased"));
-            stateTable.setItems(regionList);
-
-            FilteredList<Home.regionData> filteredData = new FilteredList<>(regionList, b-> true);
+            FilteredList<StateList> filteredData = new FilteredList<>(stateObservableArrayList, b-> true);
             searchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
                 filteredData.setPredicate(stateTable -> {
                     if(newValue==null || newValue.isEmpty()) {
@@ -51,24 +96,22 @@ public class StateController implements Initializable {
 
                     String lowerCaseFilter = newValue.toLowerCase();
 
-                    if(stateTable.getRegion().toLowerCase().indexOf(lowerCaseFilter)!=-1)
+                    if(stateTable.getState().toLowerCase().indexOf(lowerCaseFilter)!=-1)
                         return true;
                     else
                         return false;
                 });
             } ));
-            SortedList<Home.regionData> sortedData = new SortedList<>(filteredData);
+            SortedList<StateList> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(stateTable.comparatorProperty());
             stateTable.setItems(sortedData);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       showData();
+        showData();
     }
 }

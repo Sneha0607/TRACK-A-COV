@@ -24,8 +24,8 @@ public class Main extends Application {
        homeSQL.HomeSQL();
        HelplineSQL helplineSQL = new HelplineSQL();
        helplineSQL.HelplineSQL();
-       DatewiseSQL datewiseSQL = new DatewiseSQL();
-       datewiseSQL.DatewiseSQL();
+     // NotificationsSQL notificationsSQL = new NotificationsSQL();
+      // notificationsSQL.NotificationsSQL();
              launch(args);
     }
 }

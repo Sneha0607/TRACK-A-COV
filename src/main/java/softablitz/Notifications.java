@@ -1,17 +1,28 @@
 package softablitz;
 
+import javafx.scene.control.Button;
+
 public class Notifications {
-    Boolean success;
-    LatestData data;
+    public Boolean success;
+    public LatestData data;
 
     public class LatestData {
-        NotificationsData[] notifications;
-    }
+        public NotificationsData[] notifications;
 
-    public class NotificationsData{
-        String title;
-        String link;
-    }
+        public class NotificationsData {
+            public String title;
+            public String link;
 
+            public String getTitle() {
+                return title;
+            }
+
+            public String getLink() {
+                return link;
+            }
+
+            }
+        }
 }
+
 
