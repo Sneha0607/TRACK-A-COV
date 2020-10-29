@@ -4,22 +4,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import softablitz.Helpline;
-import softablitz.Home;
-import softablitz.HomeAPI;
-import softablitz.SQLConnection;
+import softablitz.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class StateController implements Initializable {
@@ -31,6 +32,7 @@ public class StateController implements Initializable {
     @FXML private TableColumn<StateList, Integer> deaths;
     @FXML private TableColumn<StateList, Integer> total;
     @FXML private TextField searchField;
+    @FXML private Label TimeStamp;
     public class StateList{
         public String State;
         public int active;
@@ -79,6 +81,9 @@ public class StateController implements Initializable {
                         resultSet.getInt("Deceased"),
                         resultSet.getInt("TotalCases")));
             }
+            Timestamp timestamp = new java.sql.Timestamp(new java.util.Date().getTime());
+            String timeStampString = timestamp.toString();
+            TimeStamp.setText(timeStampString);
 
             stateUT.setCellValueFactory(new PropertyValueFactory<StateList, String>("State"));
             confirmed.setCellValueFactory(new PropertyValueFactory<StateList, Integer>("active"));
@@ -108,6 +113,11 @@ public class StateController implements Initializable {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
+        HomeSQL homeSQL = new HomeSQL();
+        homeSQL.HomeSQL();
+        showData();
     }
 
     @Override

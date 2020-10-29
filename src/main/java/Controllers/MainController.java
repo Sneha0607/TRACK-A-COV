@@ -24,6 +24,7 @@ public class MainController implements Initializable {
     @FXML private Button btnNews;
     @FXML private Button btnHelpline;
     @FXML private Button btnSymptom;
+    @FXML private Button btnDistrict;
     @FXML private BorderPane mainPane;
 
 
@@ -36,6 +37,11 @@ public class MainController implements Initializable {
     public void handleBtnStateAction(ActionEvent actionEvent) throws IOException {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("/State.fxml");
+        mainPane.setCenter(view);
+    }
+    public void handleBtnDistrictAction(ActionEvent actionEvent) throws IOException {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("/District.fxml");
         mainPane.setCenter(view);
     }
 
@@ -62,6 +68,7 @@ public class MainController implements Initializable {
         Pane view = object.getPage("/Symptom.fxml");
         mainPane.setCenter(view);
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

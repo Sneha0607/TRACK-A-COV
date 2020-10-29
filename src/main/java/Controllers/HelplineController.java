@@ -28,6 +28,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class HelplineController implements Initializable {
@@ -40,6 +41,7 @@ public class HelplineController implements Initializable {
     @FXML private TableColumn<Helpline.HelplineData.Contacts.Regional, String> state;
     @FXML private TableColumn<Helpline.HelplineData.Contacts.Regional, String> contact;
     @FXML private TextField searchField;
+    @FXML private Label TimeStamp;
 
     HelplineAPI helplineAPI = new HelplineAPI();
 
@@ -79,6 +81,7 @@ public class HelplineController implements Initializable {
         Desktop desktop = Desktop.getDesktop();
         desktop.browse(new URI(primary.facebook));
     }
+
     public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
         HelplineSQL helplineSQL = new HelplineSQL();
         helplineSQL.HelplineSQL();
@@ -99,6 +102,9 @@ public class HelplineController implements Initializable {
             while(resultSet.next()) {
                 regionalList.add(new Helpline.HelplineData.Contacts.Regional(resultSet.getString("state"), resultSet.getString("phonenumber")));
             }
+            Timestamp timestamp = new java.sql.Timestamp(new java.util.Date().getTime());
+            String timeStampString = timestamp.toString();
+            TimeStamp.setText(timeStampString);
 
             state.setCellValueFactory(new PropertyValueFactory<Helpline.HelplineData.Contacts.Regional, String>("loc"));
             contact.setCellValueFactory(new PropertyValueFactory<Helpline.HelplineData.Contacts.Regional, String>("number"));

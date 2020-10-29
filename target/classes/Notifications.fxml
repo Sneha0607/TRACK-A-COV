@@ -11,7 +11,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font></Label>
       <TableView fx:id="notificationsTable" layoutX="50.0" layoutY="52.0" prefHeight="264.0" prefWidth="600.0">
-        <columns>
+        <columns> 
           <TableColumn fx:id="title" prefWidth="275" text="Title" />
           <TableColumn fx:id="link" prefWidth="238.00003051757812" text="Link" />
             <TableColumn fx:id="bookmark" prefWidth="77.3333740234375" text="Bookmark" />
