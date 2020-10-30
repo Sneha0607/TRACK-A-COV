@@ -12,7 +12,7 @@ import java.net.URLConnection;
 public class DatewiseAPI {
 
     public Datewise DatewiseAPI() throws IOException, InterruptedException {
-        String searchUrl = "https://api.covid19india.org/data.json";
+        String searchUrl = "https://api.rootnet.in/covid19-in/stats/history";
         Gson gson = new GsonBuilder().create();
 
         try

@@ -1,5 +1,6 @@
 package softablitz;
 
+
 public class Notifications {
     public Boolean success;
     public LatestData data;
@@ -23,7 +24,8 @@ public class Notifications {
             public String getLink() {
                 return link;
             }
-       }
+
+        }
     }
 }
 

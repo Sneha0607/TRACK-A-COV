@@ -53,15 +53,15 @@ public class HomeController implements Initializable {
     }
 
     public void loadTable() {
-        String query = "SELECT DAILYCONFIRMED, DATEYMD FROM DATEWISESUMMARY";
-        XYChart.Series<String, String> series = new XYChart.Series<>();
+        String query = "SELECT DATE, TOTAL FROM DATEWISENATIONAL";
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
         try {
             Connection connection = SQLConnection.getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(query);
             while(resultSet.next()) {
-                series.getData().add(new XYChart.Data<>(resultSet.getString(5), resultSet.getString(1)));
+                series.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getInt(2)));
             }
-            barChart.getData().add(series);
+            barChart.getData();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
