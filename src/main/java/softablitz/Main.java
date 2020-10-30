@@ -26,6 +26,9 @@ public class Main extends Application {
        helplineSQL.HelplineSQL();
        NotificationsSQL notificationsSQL = new NotificationsSQL();
        notificationsSQL.NotificationsSQL();
+       DatewiseSQL.DatewiseSQL();
+       Datewise datewise = new Datewise();
+       DatewiseAPI datewiseAPI = new DatewiseAPI();
              launch(args);
     }
 }

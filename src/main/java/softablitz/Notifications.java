@@ -1,7 +1,5 @@
 package softablitz;
 
-import javafx.scene.control.Button;
-
 public class Notifications {
     public Boolean success;
     public LatestData data;
@@ -25,9 +23,8 @@ public class Notifications {
             public String getLink() {
                 return link;
             }
-
-            }
-        }
+       }
+    }
 }
 
 

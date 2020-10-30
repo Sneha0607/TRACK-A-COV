@@ -2,6 +2,7 @@ package Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,6 +10,7 @@ import javafx.scene.control.*;
 import softablitz.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,8 +23,11 @@ public class DistrictController implements Initializable {
     @FXML private TableColumn<softablitz.District.StateData.DistrictData, Integer> Confirmed;
     @FXML private TableColumn<District.StateData.DistrictData, Integer> Recovered;
     @FXML private TableColumn<District.StateData.DistrictData, Integer> Deaths;
+    @FXML private Label TimeStamp;
+
     DistrictAPI districtAPI = new DistrictAPI();
-    public void ShowData(){
+
+    public void showData(){
         try{
             District response = districtAPI.DistrictAPI();
             District.StateData[] stateData= response.stateData;
@@ -36,6 +41,10 @@ public class DistrictController implements Initializable {
                 Recovered.setCellValueFactory(new PropertyValueFactory<District.StateData.DistrictData, Integer>("recovered"));
                 Deaths.setCellValueFactory(new PropertyValueFactory<District.StateData.DistrictData, Integer>("deaths"));
                 DistrictTable.setItems(districtDataObservableList);
+
+                Timestamp timestamp = new java.sql.Timestamp(new java.util.Date().getTime());
+                String timeStampString = timestamp.toString();
+                TimeStamp.setText(timeStampString);
             }*/
         }catch (IOException e){
             e.printStackTrace();
@@ -44,8 +53,16 @@ public class DistrictController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
+        HomeSQL homeSQL = new HomeSQL();
+        homeSQL.HomeSQL();
+        showData();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        ShowData();
+        showData();
     }
+
 }

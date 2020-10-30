@@ -14,6 +14,49 @@ public class Datewise {
         public String totalconfirmed;
         public String totaldeceased;
         public String totalrecovered;
+
+        public NationalData(String dailyconfirmed, String dailydeceased, String dailyrecovered, String date, String dateymd, String totalconfirmed, String totaldeceased, String totalrecovered) {
+            this.dailyconfirmed = dailyconfirmed;
+            this.dailydeceased = dailydeceased;
+            this.dailyrecovered = dailyrecovered;
+            this.date = date;
+            this.dateymd = dateymd;
+            this.totalconfirmed = totalconfirmed;
+            this.totaldeceased = totaldeceased;
+            this.totalrecovered = totalrecovered;
+        }
+
+        public String getDailyconfirmed() {
+            return dailyconfirmed;
+        }
+
+        public String getDailydeceased() {
+            return dailydeceased;
+        }
+
+        public String getDailyrecovered() {
+            return dailyrecovered;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public String getDateymd() {
+            return dateymd;
+        }
+
+        public String getTotalconfirmed() {
+            return totalconfirmed;
+        }
+
+        public String getTotaldeceased() {
+            return totaldeceased;
+        }
+
+        public String getTotalrecovered() {
+            return totalrecovered;
+        }
     }
 
     public class StateData {
