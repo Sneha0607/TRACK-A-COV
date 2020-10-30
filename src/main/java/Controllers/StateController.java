@@ -33,6 +33,7 @@ public class StateController implements Initializable {
     @FXML private TableColumn<StateList, Integer> total;
     @FXML private TextField searchField;
     @FXML private Label TimeStamp;
+
     public class StateList{
         public String State;
         public int active;
@@ -76,7 +77,7 @@ public class StateController implements Initializable {
             ResultSet resultSet = connection.createStatement().executeQuery("Select * from STATEWISE");
             while(resultSet.next()){
                 stateObservableArrayList.add(new StateList(resultSet.getString("State"),
-                        (resultSet.getInt("Active")),
+                        resultSet.getInt("Active"),
                         resultSet.getInt("Recovered"),
                         resultSet.getInt("Deceased"),
                         resultSet.getInt("TotalCases")));
@@ -114,6 +115,7 @@ public class StateController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
         HomeSQL homeSQL = new HomeSQL();
         homeSQL.HomeSQL();

@@ -5,9 +5,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import softablitz.HomeAPI;
 import softablitz.Home;
+import softablitz.SQLConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -18,6 +22,16 @@ public class HomeController implements Initializable {
     @FXML private Label indiaDeaths;
 
     HomeAPI homeAPI = new HomeAPI();
+
+    public void showData() {
+        try {
+            Connection connection = SQLConnection.getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery("Select * from HOME");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -1,25 +1,14 @@
 package Controllers;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import softablitz.Helpline;
-import softablitz.HelplineAPI;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 public class SymptomController implements Initializable{
     @FXML private ComboBox<String> Age;
     @FXML private ComboBox<String> Sex;

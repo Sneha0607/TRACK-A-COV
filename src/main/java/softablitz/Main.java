@@ -24,8 +24,8 @@ public class Main extends Application {
        homeSQL.HomeSQL();
        HelplineSQL helplineSQL = new HelplineSQL();
        helplineSQL.HelplineSQL();
-     // NotificationsSQL notificationsSQL = new NotificationsSQL();
-      // notificationsSQL.NotificationsSQL();
+       NotificationsSQL notificationsSQL = new NotificationsSQL();
+       notificationsSQL.NotificationsSQL();
              launch(args);
     }
 }

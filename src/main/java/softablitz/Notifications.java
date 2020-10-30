@@ -6,12 +6,17 @@ public class Notifications {
     public Boolean success;
     public LatestData data;
 
-    public class LatestData {
-        public NotificationsData[] notifications;
+    public static class LatestData {
+        public NotificationsData[] notificationsData;
 
-        public class NotificationsData {
+        public static class NotificationsData {
             public String title;
             public String link;
+
+            public NotificationsData(String title, String link) {
+                this.title = title;
+                this.link = link;
+            }
 
             public String getTitle() {
                 return title;

@@ -10,14 +10,14 @@
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <TableView fx:id="notificationsTable" layoutX="50.0" layoutY="52.0" prefHeight="264.0" prefWidth="600.0">
+      <TableView fx:id="notificationsTable" layoutX="50.0" layoutY="62.0" prefHeight="264.0" prefWidth="600.0">
         <columns> 
           <TableColumn fx:id="title" prefWidth="275" text="Title" />
           <TableColumn fx:id="link" prefWidth="238.00003051757812" text="Link" />
             <TableColumn fx:id="bookmark" prefWidth="77.3333740234375" text="Bookmark" />
         </columns>
       </TableView>
-      <Label layoutX="282.0" layoutY="333.0" prefHeight="16.0" prefWidth="136.0" text="Bookmarked Articles">
+      <Label layoutX="283.0" layoutY="337.0" prefHeight="16.0" prefWidth="136.0" text="Bookmarked Articles">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -29,5 +29,19 @@
            <TableColumn fx:id="remove" prefWidth="75" text="Remove" />
         </columns>
       </TableView>
+       <Button fx:id="Refresh" layoutX="561.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleBtnRefreshAction" prefHeight="25.0" prefWidth="69.0" text="Refresh">
+       <font>
+           <Font name="Arial Bold" size="13.0" />
+       </font></Button>
+       <Label layoutX="481.0" layoutY="35.0" prefHeight="17.0" prefWidth="80.0" text="Last updated at:">
+           <font>
+               <Font name="Regular" size="11.0" />
+           </font>
+       </Label>
+       <Label fx:id="TimeStamp" layoutX="561.0" layoutY="35.0" prefHeight="17.0" prefWidth="133.0" text="">
+           <font>
+               <Font name="Regular" size="11.0" />
+           </font>
+       </Label>
    </children>
 </Pane>

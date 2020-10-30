@@ -1,6 +1,5 @@
 package softablitz;
 
-import java.util.List;
 
 public class Home {
     public int activeCases;
@@ -15,6 +14,55 @@ public class Home {
     public String lastUpdatedAtApify;
     public String readMe;
     public regionData[] regionData;
+
+    public int getActiveCases() {
+        return activeCases;
+    }
+
+    public int getActiveCasesNew() {
+        return activeCasesNew;
+    }
+
+    public int getRecovered() {
+        return recovered;
+    }
+
+    public int getRecoveredNew() {
+        return recoveredNew;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public int getDeathsNew() {
+        return deathsNew;
+    }
+
+    public int getPreviousDayTests() {
+        return previousDayTests;
+    }
+
+    public int getTotalCases() {
+        return totalCases;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public String getLastUpdatedAtApify() {
+        return lastUpdatedAtApify;
+    }
+
+    public String getReadMe() {
+        return readMe;
+    }
+
+    public Home.regionData[] getRegionData() {
+        return regionData;
+    }
+
 
 
         public static class regionData {

@@ -18,8 +18,6 @@ import softablitz.HelplineAPI;
 import softablitz.HelplineSQL;
 import softablitz.SQLConnection;
 
-
-import javax.security.sasl.SaslException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;

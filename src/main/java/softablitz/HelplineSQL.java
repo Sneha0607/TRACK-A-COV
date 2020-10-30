@@ -14,7 +14,6 @@ public class HelplineSQL {
 
             Helpline helpline = helplineAPI.HelplineAPI();
 
-
             for (Helpline.HelplineData.Contacts.Regional regional : helpline.data.contacts.regional) {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO HELPLINESREGIONAL VALUES (?,?)");
                 preparedStatement.setString(1, regional.getLoc());
