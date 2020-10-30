@@ -55,3 +55,76 @@ public class DatewiseSQL {
     }
 }
 
+/*
+Priyansh, [30.10.20 23:21]
+package softablitz;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class DatewiseSQL {
+    static class PooledDataSource {
+        private static BasicDataSource basicDS;
+        {
+            try {
+                basicDS = new BasicDataSource();
+                Properties properties = new Properties();
+                // Loading properties file
+                InputStream inputStream = new FileInputStream("resources/db.properties");
+                properties.load(inputStream);
+                basicDS.setDriverClassName(properties.getProperty("com.mysql.jdbc.Driver")); //loads the jdbc driver
+                basicDS.setUrl(properties.getProperty("jdbc:mysql://localhost/"));
+                basicDS.setUsername(properties.getProperty("root"));
+                basicDS.setPassword(properties.getProperty("kame"));
+                // Parameters for connection pooling
+                basicDS.setInitialSize(10);
+                basicDS.setMaxTotal(10);
+
+            }catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static DataSource getDataSource() {
+            return basicDS;
+        }
+    }
+    public void DatewiseSQL() throws IOException, InterruptedException, NamingException {
+
+
+        Connection connection = null;
+        try{
+            DataSource dataSource = PooledDataSource.getDataSource();
+            connection = dataSource.getConnection();
+        Statement statement = null;
+        DatewiseAPI datewiseAPI = new DatewiseAPI();
+        Datewise datewise = datewiseAPI.DatewiseAPI();
+
+            statement = connection.createStatement();
+            for(Datewise.NationalData nationalData: datewise.nationalData){
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Datewisenational VALUES(?,?,?,?)");
+                preparedStatement.setString(1, nationalData.getDateymd());
+                preparedStatement.setString(2, nationalData.getDailyconfirmed());
+                preparedStatement.setString(3, nationalData.getDailyrecovered());
+                preparedStatement.setString(4, nationalData.getDailydeceased());
+
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+}
+ */

@@ -5,7 +5,7 @@ public class Notifications {
     public LatestData data;
 
     public static class LatestData {
-        public NotificationsData[] notificationsData;
+        public NotificationsData[] notifications;
 
         public static class NotificationsData {
             public String title;

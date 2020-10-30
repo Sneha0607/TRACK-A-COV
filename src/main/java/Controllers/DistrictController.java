@@ -29,9 +29,9 @@ public class DistrictController implements Initializable {
 
     public void showData(){
         try{
-            District response = districtAPI.DistrictAPI();
-            District.StateData[] stateData= response.stateData;
-            System.out.println(response.stateData);
+           // District response = districtAPI.DistrictAPI();
+            //District.StateData[] stateData= response.stateData;
+            //System.out.println(response.stateData);
             /*for(softablitz.District.StateData stateData1 : response.stateData) {
                 State.setCellValueFactory(new PropertyValueFactory<District.StateData, String>("state"));
                 District.StateData.DistrictData[] districtData = stateData1.districtData;
@@ -46,18 +46,13 @@ public class DistrictController implements Initializable {
                 String timeStampString = timestamp.toString();
                 TimeStamp.setText(timeStampString);
             }*/
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
     public void handleBtnRefreshAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
-        HomeSQL homeSQL = new HomeSQL();
-        homeSQL.HomeSQL();
-        showData();
+
     }
 
     @Override

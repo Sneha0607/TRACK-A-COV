@@ -20,15 +20,12 @@ public class Main extends Application {
 
 
    public static void main(String[] args) throws IOException, InterruptedException {
-       HomeSQL homeSQL = new HomeSQL();
-       homeSQL.HomeSQL();
-       HelplineSQL helplineSQL = new HelplineSQL();
-       helplineSQL.HelplineSQL();
+
+       HomeSQL.HomeSQL();
+       HelplineSQL.HelplineSQL();
        NotificationsSQL notificationsSQL = new NotificationsSQL();
        notificationsSQL.NotificationsSQL();
        DatewiseSQL.DatewiseSQL();
-       Datewise datewise = new Datewise();
-       DatewiseAPI datewiseAPI = new DatewiseAPI();
              launch(args);
     }
 }

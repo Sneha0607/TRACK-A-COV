@@ -4,9 +4,8 @@ import java.sql.*;
 
 public class HomeSQL {
 
-    HomeAPI homeAPI = new HomeAPI();
-    public  void HomeSQL() {
-
+    public static void HomeSQL() {
+        HomeAPI homeAPI = new HomeAPI();
         Connection connection = SQLConnection.getConnection();
         Statement statement = null;
         try{
@@ -27,7 +26,7 @@ public class HomeSQL {
                 preparedStatement.executeUpdate();
             }
 
-            //statement.executeUpdate("TRUNCATE TABLE HOME");
+            /*statement.executeUpdate("TRUNCATE TABLE HOME");
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO HOME VALUES (?,?,?,?,?,?,?,?,?,?,?");
             preparedStatement.setInt(1, home.getActiveCases());
             preparedStatement.setInt(2, home.getActiveCasesNew());
@@ -41,6 +40,8 @@ public class HomeSQL {
             preparedStatement.setString(10, home.getLastUpdatedAtApify());
             preparedStatement.setString(11, home.getReadMe());
             preparedStatement.executeUpdate();
+            */
+
 
         }catch (SQLException e){
             e.printStackTrace();;

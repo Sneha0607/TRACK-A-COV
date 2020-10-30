@@ -14,10 +14,10 @@ public class NotificationsSQL {
 
             Notifications notifications = notificationsAPI.NotificationsAPI();
 
-            for (Notifications.LatestData.NotificationsData notification : notifications.data.notificationsData) {
+            for(Notifications.LatestData.NotificationsData notificationsData: notifications.data.notifications){
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO NOTIFICATIONS VALUES (?,?)");
-                preparedStatement.setString(1, notification.getTitle());
-                preparedStatement.setString(2, notification.getLink());
+                preparedStatement.setString(1, notificationsData.getTitle());
+                preparedStatement.setString(2, notificationsData.getLink());
                 preparedStatement.executeUpdate();
             }
 
@@ -45,3 +45,34 @@ public class NotificationsSQL {
         }
     }
 }
+
+
+/*package softablitz;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class NotificationsSQL {
+    public void NotificationsSQL() throws IOException, InterruptedException {
+        Connection connection = SQLConnection.getConnection();
+        Statement statement = null;
+        NotificationsAPI notificationsAPI = new NotificationsAPI();
+        Notifications notifications = notificationsAPI.NotificationsAPI();
+        try{
+            statement = connection.createStatement();
+            for(Notifications.LatestData.NotificationsData notificationsData: notifications.data.notifications){
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO NOTIFICATIONS VALUES(?,?)");
+                preparedStatement.setString(1, notificationsData.getTitle());
+                preparedStatement.setString(2, notificationsData.getLink());
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+}
+*/
