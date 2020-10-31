@@ -37,11 +37,6 @@ public class MainController implements Initializable {
         Pane view = object.getPage("/State.fxml");
         mainPane.setCenter(view);
     }
-    public void handleBtnDistrictAction(ActionEvent actionEvent) throws IOException {
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("/District.fxml");
-        mainPane.setCenter(view);
-    }
 
     public void handleBtnDateAction(ActionEvent actionEvent) throws IOException {
         FxmlLoader object = new FxmlLoader();

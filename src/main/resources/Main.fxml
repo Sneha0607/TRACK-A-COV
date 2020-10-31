@@ -23,10 +23,6 @@
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font></Button>
-                  <Button id="btnDistrict" fx:id="BtnDistrict" mnemonicParsing="false" onAction="#handleBtnDistrictAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #3F2B63;" text="District-Wise" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="13.0" />
-                     </font></Button>
                   <Button id="btnDate" fx:id="BtnDate" mnemonicParsing="false" onAction="#handleBtnDateAction" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #3F2B63;" text="Date-Wise" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="13.0" />

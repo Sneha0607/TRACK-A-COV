@@ -5,13 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import softablitz.DatewiseSQL;
-import softablitz.HomeAPI;
-import softablitz.Home;
-import softablitz.HomeSQL;
+import softablitz.*;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.*;
@@ -22,9 +22,12 @@ public class HomeController implements Initializable {
     @FXML private Label indiaConfirmed;
     @FXML private Label indiaRecovered;
     @FXML private Label indiaDeaths;
+    @FXML private Label newConfirmed;
+    @FXML private Label newRecovered;
+    @FXML private Label newDeaths;
     @FXML private LineChart<String, Integer> lineChart;
     @FXML private Label TimeStamp;
-
+    @FXML private Hyperlink sourceURL;
 
     HomeAPI homeAPI = new HomeAPI();
     public void loadGraph() {
@@ -68,6 +71,12 @@ public class HomeController implements Initializable {
         loadGraph();
     }
 
+    public void handleSourceURLAction(ActionEvent actionEvent) throws IOException, InterruptedException, URISyntaxException {
+        Home response = homeAPI.HomeAPI();
+        Desktop desktop = Desktop.getDesktop();
+        desktop.browse(new URI(response.sourceUrl));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -77,6 +86,10 @@ public class HomeController implements Initializable {
             indiaConfirmed.setText(String.valueOf(data.totalCases));
             indiaRecovered.setText(String.valueOf(data.recovered));
             indiaDeaths.setText(String.valueOf(data.deaths));
+            newConfirmed.setText("+" + String.valueOf(data.activeCasesNew));
+            newRecovered.setText("+" + String.valueOf(data.recoveredNew));
+            newDeaths.setText("+" + String.valueOf(data.deathsNew));
+            sourceURL.setText(data.sourceUrl);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
