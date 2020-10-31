@@ -1,6 +1,5 @@
 package Controllers;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import softablitz.Datewise;
 import softablitz.DatewiseSQL;
 import softablitz.SQLConnection;
 import java.time.LocalDate;
@@ -25,7 +23,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -92,22 +89,24 @@ public class DatewiseController implements Initializable {
             deaths.setCellValueFactory(new PropertyValueFactory<DateList, Integer>("deaths"));
             datewiseTable.setItems(dateListObservableList);
 
-            /*
-            FilteredList<DateList> filteredItems = new FilteredList<>(dateListObservableList);
 
-            filteredItems.predicateProperty().bind(Bindings.createObjectBinding(()-> {
-                        LocalDate date = datePicker.getValue();
+            FilteredList<DateList> filteredData = new FilteredList<>(dateListObservableList, b-> true);
+            datePicker.valueProperty().addListener(((observableValue, oldValue, newValue) -> {
+                filteredData.setPredicate(datewiseTable -> {
+                    if(newValue==null || newValue.toString().isEmpty()) {
+                        return true;
+                    }
 
-                        // get final values != null
-                        final LocalDate finalDate = date == null ? LocalDate.MIN : date;
-
-                        // values for openDate need to be in the interval [finalMin, finalMax]
-                       // return ti -> !finalMin.isAfter(ti.getOpenDate()) && !finalMax.isBefore(ti.getOpenDate());
-
-                        },
-                    datePicker.valueProperty()));
-
-            datewiseTable.setItems(filteredItems);*/
+                    String lowerCaseFilter = newValue.toString();
+                    if(datewiseTable.getDate().toLowerCase().contains(lowerCaseFilter))
+                        return true;
+                    else
+                        return false;
+                });
+            } ));
+            SortedList<DateList> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(datewiseTable.comparatorProperty());
+            datewiseTable.setItems(sortedData);
 
         }catch (SQLException e){
             e.printStackTrace();
