@@ -1,7 +1,11 @@
 package Controllers;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.util.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,10 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import softablitz.Datewise;
 import softablitz.DatewiseSQL;
-import softablitz.HelplineSQL;
 import softablitz.SQLConnection;
-
+import java.time.LocalDate;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -21,6 +25,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DatewiseController implements Initializable {
@@ -31,6 +38,7 @@ public class DatewiseController implements Initializable {
     @FXML private TableColumn<DateList, Integer> recovered;
     @FXML private TableColumn<DateList, Integer> deaths;
     @FXML private Label TimeStamp;
+    private final String pattern = "yyyy-MM-dd";
 
     public class DateList{
         String Date;
@@ -74,7 +82,7 @@ public class DatewiseController implements Initializable {
                         resultSet.getInt("Deaths")));
             }
 
-            Timestamp timestamp = new java.sql.Timestamp(new java.util.Date().getTime());
+            Timestamp timestamp = new Timestamp(new Date().getTime());
             String timeStampString = timestamp.toString();
             TimeStamp.setText(timeStampString);
 
@@ -83,6 +91,24 @@ public class DatewiseController implements Initializable {
             recovered.setCellValueFactory(new PropertyValueFactory<DateList, Integer>("recovered"));
             deaths.setCellValueFactory(new PropertyValueFactory<DateList, Integer>("deaths"));
             datewiseTable.setItems(dateListObservableList);
+
+            /*
+            FilteredList<DateList> filteredItems = new FilteredList<>(dateListObservableList);
+
+            filteredItems.predicateProperty().bind(Bindings.createObjectBinding(()-> {
+                        LocalDate date = datePicker.getValue();
+
+                        // get final values != null
+                        final LocalDate finalDate = date == null ? LocalDate.MIN : date;
+
+                        // values for openDate need to be in the interval [finalMin, finalMax]
+                       // return ti -> !finalMin.isAfter(ti.getOpenDate()) && !finalMax.isBefore(ti.getOpenDate());
+
+                        },
+                    datePicker.valueProperty()));
+
+            datewiseTable.setItems(filteredItems);*/
+
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -97,5 +123,20 @@ public class DatewiseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         showData();
+
+        datePicker.setConverter(
+                new StringConverter<LocalDate>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date!=null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string!=null && !string.isEmpty()) ? LocalDate.parse(string, dateFormatter) : null;
+                    }
+                }
+        );
     }
 }
